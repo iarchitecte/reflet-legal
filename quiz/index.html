@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Quel est ton type de mental ? — Reflet</title>
+<meta name="description" content="10 questions pour savoir comment tourne ton cerveau quand tu n'arrives pas à lâcher.">
+<meta property="og:title" content="Quel est ton type de mental ?">
+<meta property="og:description" content="10 questions pour savoir comment tourne ton cerveau quand tu n'arrives pas à lâcher.">
+<meta property="og:type" content="website">
+<style>
+  :root {
+    --night: #0C0918;
+    --violet: #7C5CFF;
+    --violet-deep: #2A1266;
+    --violet-soft: #B49CFF;
+    --cream: #F3F0FB;
+    --muted: #7E7799;
+    --card: #150F26;
+    --border: #2A2043;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    background: var(--night);
+    color: var(--cream);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .halo {
+    position: fixed;
+    top: -30vh; left: 50%;
+    transform: translateX(-50%);
+    width: 130vw; height: 80vh;
+    background: radial-gradient(ellipse at center, rgba(124,92,255,0.20), transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 34px 24px 70px;
+  }
+  .serif { font-family: Georgia, "Times New Roman", serif; }
+
+  /* ORBE */
+  .orb {
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    margin: 0 auto 34px;
+    position: relative;
+    background: var(--violet-deep);
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(124,92,255,0.5);
+    animation: breathe 5.2s ease-in-out infinite;
+  }
+  .orb.small { width: 92px; height: 92px; margin-bottom: 26px; }
+  .orb::before {
+    content: "";
+    position: absolute;
+    width: 165%; height: 100%;
+    top: -8%; left: -18%;
+    border-radius: 50%;
+    background: var(--violet);
+    opacity: 0.55;
+    animation: spin 18s linear infinite;
+  }
+  .orb::after {
+    content: "";
+    position: absolute;
+    width: 32%; height: 32%;
+    top: 34%; left: 34%;
+    border-radius: 50%;
+    background: #E9E0FF;
+    box-shadow: 0 0 26px rgba(255,255,255,0.75);
+  }
+  @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* INTRO */
+  h1 { font-size: 33px; line-height: 1.28; text-align: center; margin: 0 0 18px; }
+  .sub { color: var(--muted); font-size: 16px; line-height: 1.6; text-align: center; margin: 0 0 38px; }
+  .kicker {
+    font-size: 11px; letter-spacing: 3px; color: var(--violet-soft);
+    font-weight: 700; text-align: center; margin-bottom: 16px;
+  }
+
+  button.cta {
+    display: block; width: 100%;
+    background: var(--violet); color: #fff;
+    border: none; border-radius: 100px;
+    padding: 19px; font-size: 17px; font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(124,92,255,0.4);
+    font-family: inherit;
+    transition: transform 0.15s;
+  }
+  button.cta:active { transform: scale(0.98); }
+  button.cta.ghost {
+    background: transparent; color: var(--violet-soft);
+    border: 1px solid var(--border); box-shadow: none;
+  }
+
+  /* PROGRESSION */
+  .bar { display: flex; gap: 5px; margin-bottom: 46px; }
+  .seg { flex: 1; height: 3px; border-radius: 3px; background: #241C3D; transition: background 0.3s; }
+  .seg.on { background: var(--violet); }
+
+  /* QUESTIONS */
+  .q { font-size: 26px; line-height: 1.38; margin: 0 0 32px; }
+  .opts { display: flex; flex-direction: column; gap: 11px; }
+  .opt {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 19px 21px;
+    font-size: 16px; line-height: 1.45;
+    color: #D9D4EC;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: border-color 0.18s, background 0.18s, transform 0.12s;
+  }
+  .opt:active { transform: scale(0.99); }
+  .opt:hover { border-color: #46396F; background: #1A1330; }
+
+  /* RESULTAT */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 26px;
+    margin-bottom: 22px;
+  }
+  .archetype { font-size: 38px; line-height: 1.2; text-align: center; margin: 0 0 8px; }
+  .tagline { color: var(--violet-soft); font-size: 16px; text-align: center; margin: 0 0 34px; font-style: italic; }
+  .lbl {
+    font-size: 11px; letter-spacing: 2.4px; color: var(--violet-soft);
+    font-weight: 700; text-transform: uppercase; margin-bottom: 11px;
+  }
+  .txt { font-size: 16px; line-height: 1.68; color: #C4BDDC; margin: 0; }
+  .txt + .txt { margin-top: 14px; }
+
+  /* EMAIL */
+  .mailbox { border-color: #46396F; }
+  input[type=email] {
+    width: 100%;
+    background: #0F0A1E;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 17px;
+    color: var(--cream);
+    font-size: 16px;
+    font-family: inherit;
+    margin-bottom: 13px;
+  }
+  input[type=email]:focus { outline: none; border-color: var(--violet); }
+  .fine { font-size: 12.5px; color: #5E5680; line-height: 1.6; margin-top: 14px; text-align: center; }
+  .fine a { color: #7E7799; }
+
+  .share { display: flex; gap: 10px; margin-top: 22px; }
+  .share button { flex: 1; }
+
+  .hidden { display: none; }
+  .fadein { animation: fade 0.5s ease both; }
+  @keyframes fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  .toast {
+    position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%);
+    background: var(--violet); color: #fff;
+    padding: 13px 24px; border-radius: 100px;
+    font-size: 14px; font-weight: 600;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    z-index: 10;
+  }
+  .toast.on { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="halo"></div>
+<div class="wrap">
+
+  <!-- ÉCRAN 1 : INTRO -->
+  <section id="intro">
+    <div class="orb"></div>
+    <div class="kicker">10 QUESTIONS · 2 MINUTES</div>
+    <h1 class="serif">Quel est ton type<br>de mental ?</h1>
+    <p class="sub">
+      Tout le monde n'a pas la même façon de tourner en boucle.
+      Dix questions pour savoir comment le tien fonctionne — et pourquoi
+      tu n'arrives pas à lâcher.
+    </p>
+    <button class="cta" onclick="demarrer()">Commencer</button>
+  </section>
+
+  <!-- ÉCRAN 2 : QUESTIONS -->
+  <section id="quiz" class="hidden">
+    <div class="bar" id="bar"></div>
+    <h2 class="q serif" id="question"></h2>
+    <div class="opts" id="options"></div>
+  </section>
+
+  <!-- ÉCRAN 3 : RÉSULTAT -->
+  <section id="resultat" class="hidden">
+    <div class="orb small"></div>
+    <div class="kicker">TON PROFIL</div>
+    <h2 class="archetype serif" id="nom"></h2>
+    <p class="tagline" id="tagline"></p>
+
+    <div class="card">
+      <div class="lbl">Comment ça marche chez toi</div>
+      <p class="txt" id="desc"></p>
+    </div>
+
+    <div class="card">
+      <div class="lbl">Ce que ça te coûte</div>
+      <p class="txt" id="cout"></p>
+    </div>
+
+    <div class="card">
+      <div class="lbl">Ce qui t'aiderait</div>
+      <p class="txt" id="aide"></p>
+    </div>
+
+    <div class="card mailbox" id="mailbox">
+      <div class="lbl">Ton analyse complète</div>
+      <p class="txt" style="margin-bottom:18px">
+        Laisse ton email et je t'envoie l'analyse détaillée de ton profil,
+        plus le lien pour essayer Reflet gratuitement.
+      </p>
+      <input type="email" id="email" placeholder="ton@email.com" autocomplete="email">
+      <button class="cta" onclick="envoyer()">Recevoir mon analyse</button>
+      <p class="fine">
+        Pas de spam. Un seul email, puis plus rien si tu ne veux pas.
+      </p>
+    </div>
+
+    <div class="share">
+      <button class="cta ghost" onclick="partager()">Partager</button>
+      <button class="cta ghost" onclick="recommencer()">Refaire</button>
+    </div>
+  </section>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ---------- ARCHÉTYPES ---------- */
+const PROFILS = {
+  rembobineur: {
+    nom: "Le Rembobineur",
+    tag: "Ton ennemi, c'est hier.",
+    desc: "Tu rejoues. Une conversation, un message envoyé, une réunion — tu repasses la scène en boucle en cherchant ce que tu aurais dû dire. Ton cerveau traite le passé comme un dossier jamais classé : tant qu'il reste une phrase à réécrire, il ne referme pas le fichier.",
+    cout: "Tu vis deux fois chaque moment désagréable, et la deuxième fois est souvent pire que la première. Pendant que tu réécris hier, aujourd'hui passe sans toi. Et le sommeil devient le pire moment de la journée, parce que c'est là que le silence laisse la place au rembobinage.",
+    aide: "Ce qui coupe la boucle, ce n'est pas de comprendre — c'est de sortir la pensée de ta tête. Une fois dite à voix haute, elle arrête de tourner : elle a un début et une fin. C'est exactement ce que fait Reflet en une minute."
+  },
+  meteorologue: {
+    nom: "Le Météorologue",
+    tag: "Ton ennemi, c'est demain.",
+    desc: "Tu prévois. Avant chaque situation un peu importante, ton cerveau déroule les scénarios — surtout les mauvais. Tu appelles ça être préparé, et tu n'as pas complètement tort : anticiper le pire, c'est ta façon de ne jamais être pris de court.",
+    cout: "Le problème, c'est que tu vis les catastrophes qui n'arrivent pas. Ton corps réagit aux scénarios comme s'ils étaient réels — la tension, le sommeil haché, la fatigue au réveil. Tu payes le prix de dix versions d'un événement qui n'aura lieu qu'une fois, et rarement comme tu l'imaginais.",
+    aide: "Ce qui aide, c'est de nommer précisément ce que tu redoutes. Tant que la peur reste floue, elle grossit ; dite clairement, elle redevient à sa taille réelle. Reflet t'aide à mettre des mots précis sur ce qui reste vague."
+  },
+  procureur: {
+    nom: "Le Procureur",
+    tag: "Ton ennemi, c'est toi.",
+    desc: "Tu instruis ton propre procès. Chaque erreur devient une pièce à conviction, chaque maladresse confirme un dossier que tu montes contre toi depuis longtemps. Tu es plus dur avec toi que tu ne le serais jamais avec quelqu'un d'autre — et tu le sais, ce qui n'y change rien.",
+    cout: "Cette exigence te sert parfois : tu ne bâcles pas, tu ne te contentes pas de peu. Mais elle te vole toutes tes réussites. Chaque chose réussie devient normale, chaque chose ratée devient une preuve. Le compteur ne monte jamais du bon côté.",
+    aide: "Ce qui change quelque chose, c'est d'entendre ce que tu dis de toi formulé par quelqu'un d'autre. C'est à ce moment qu'on réalise la dureté du ton. Reflet te renvoie ce que tu viens de dire — et la différence est souvent frappante."
+  },
+  decodeur: {
+    nom: "Le Décodeur",
+    tag: "Ton ennemi, ce sont les silences.",
+    desc: "Tu lis entre les lignes, tout le temps. Un message plus court que d'habitude, un ton un peu sec, une réponse qui tarde — tu remarques tout et tu cherches ce que ça veut dire. Ton cerveau ne supporte pas les blancs, alors il les remplit tout seul.",
+    cout: "Et il les remplit rarement avec du positif. Tu construis des interprétations entières sur des signaux minuscules, puis tu réagis à ton interprétation plutôt qu'à la réalité. Le plus épuisant, c'est que tu as parfois raison — assez souvent pour ne jamais pouvoir arrêter de chercher.",
+    aide: "Ce qui aide, c'est de séparer ce qui s'est réellement passé de ce que tu en as déduit. Dit à voix haute, l'écart entre les deux devient évident. Reflet fait précisément ce tri avec toi."
+  },
+  sature: {
+    nom: "Le Saturé",
+    tag: "Ton ennemi, c'est le volume.",
+    desc: "Ce n'est pas une pensée qui tourne, c'est toutes en même temps. Tout se superpose et plus rien ne ressort. Tu ouvres un truc, tu le fermes, tu scrolles, tu recommences. Ce n'est pas de la paresse — c'est un embouteillage.",
+    cout: "Tu finis les journées épuisé sans rien avoir produit, ce qui alimente une culpabilité qui augmente encore la saturation. Plus tu te reproches de ne rien faire, moins tu arrives à démarrer. La boucle se referme et se resserre.",
+    aide: "Ce qui décharge, c'est de tout sortir sans essayer de trier d'abord. Le tri vient après, et il est beaucoup plus facile une fois que ce n'est plus dans ta tête. C'est le principe même de Reflet : tu vides, il organise."
+  }
+};
+
+/* ---------- QUESTIONS ---------- */
+const QUESTIONS = [
+  {
+    q: "Il est 23h et tu n'arrives pas à dormir. À quoi tu penses ?",
+    o: [
+      ["À un truc que j'ai dit aujourd'hui et que je regrette", "rembobineur"],
+      ["À ce qui m'attend demain", "meteorologue"],
+      ["À tout ce que je n'ai pas fait", "procureur"],
+      ["À un message que quelqu'un m'a envoyé et que j'essaie de décrypter", "decodeur"]
+    ]
+  },
+  {
+    q: "Tu envoies un message important. La personne ne répond pas pendant trois heures.",
+    o: [
+      ["Je relis ce que j'ai écrit pour voir si j'ai mal formulé", "rembobineur"],
+      ["J'imagine déjà qu'elle l'a mal pris", "decodeur"],
+      ["Je me dis que j'aurais jamais dû l'envoyer", "procureur"],
+      ["Honnêtement, j'ai déjà quinze autres trucs en tête", "sature"]
+    ]
+  },
+  {
+    q: "Ta journée s'est bien passée. Comment tu la racontes le soir ?",
+    o: [
+      ["Je repense surtout au seul moment gênant", "rembobineur"],
+      ["Je pense déjà à demain", "meteorologue"],
+      ["Je liste ce que j'aurais pu faire mieux", "procureur"],
+      ["Je sais pas trop, tout est un peu flou", "sature"]
+    ]
+  },
+  {
+    q: "Tu as un rendez-vous important dans une semaine.",
+    o: [
+      ["Je rejoue mentalement des rendez-vous passés qui se sont mal passés", "rembobineur"],
+      ["Je prépare tous les scénarios possibles", "meteorologue"],
+      ["Je me demande si je suis vraiment à la hauteur", "procureur"],
+      ["J'essaie de ne pas y penser, ça m'angoisse trop", "sature"]
+    ]
+  },
+  {
+    q: "Quelqu'un te répond juste « ok ».",
+    o: [
+      ["Je cherche ce que ça veut dire", "decodeur"],
+      ["Je repense à ce que j'ai dit avant", "rembobineur"],
+      ["Je me dis que j'ai dû faire quelque chose de travers", "procureur"],
+      ["Rien de spécial, c'est juste un ok", "meteorologue"]
+    ]
+  },
+  {
+    q: "Tu dois commencer une tâche que tu repousses depuis trois jours.",
+    o: [
+      ["J'ai tellement de choses à faire que je sais pas par où commencer", "sature"],
+      ["J'ai peur de mal la faire", "procureur"],
+      ["J'imagine tout ce qui pourrait mal tourner", "meteorologue"],
+      ["Je repense à la dernière fois où j'ai galéré sur un truc pareil", "rembobineur"]
+    ]
+  },
+  {
+    q: "Sur quoi tu passes le plus de temps mentalement ?",
+    o: [
+      ["Ce qui s'est déjà passé", "rembobineur"],
+      ["Ce qui pourrait arriver", "meteorologue"],
+      ["Ce que je vaux", "procureur"],
+      ["Ce que les autres pensent de moi", "decodeur"]
+    ]
+  },
+  {
+    q: "Quand tu es en groupe et que quelqu'un rit derrière toi.",
+    o: [
+      ["Je me demande si c'est de moi", "decodeur"],
+      ["Je repasse en tête ce que je viens de dire", "rembobineur"],
+      ["Je pense que oui, et que c'est mérité", "procureur"],
+      ["J'entends même pas, je suis ailleurs", "sature"]
+    ]
+  },
+  {
+    q: "Ta phrase intérieure la plus fréquente ?",
+    o: [
+      ["« J'aurais dû... »", "rembobineur"],
+      ["« Et si... »", "meteorologue"],
+      ["« Je suis nul. »", "procureur"],
+      ["« Je sais plus où j'en suis. »", "sature"]
+    ]
+  },
+  {
+    q: "Si tu pouvais éteindre une seule chose dans ta tête, ce serait quoi ?",
+    o: [
+      ["Le bouton rembobinage", "rembobineur"],
+      ["Les scénarios catastrophe", "meteorologue"],
+      ["La voix qui me juge", "procureur"],
+      ["Le bruit, juste le bruit", "sature"]
+    ]
+  }
+];
+
+const SUPA_URL = 'https://wmyjvsjzwtaqdgufipqe.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndteWp2c2p6d3RhcWRndWZpcHFlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODU2MDAyMjUsImV4cCI6MjEwMTE3NjIyNX0.dpqgSHieCN-k4y7VcvyyF1W9mb5-eS_YeA5OS2EQbtY';
+
+/* ---------- LOGIQUE ---------- */
+let index = 0;
+let scores = { rembobineur: 0, meteorologue: 0, procureur: 0, decodeur: 0, sature: 0 };
+let profilFinal = null;
+
+function el(id) { return document.getElementById(id); }
+
+function demarrer() {
+  el('intro').classList.add('hidden');
+  el('quiz').classList.remove('hidden');
+  construireBarre();
+  afficher();
+}
+
+function construireBarre() {
+  el('bar').innerHTML = QUESTIONS.map(() => '<div class="seg"></div>').join('');
+}
+
+function majBarre() {
+  document.querySelectorAll('.seg').forEach((s, i) => {
+    s.classList.toggle('on', i <= index);
+  });
+}
+
+function afficher() {
+  const item = QUESTIONS[index];
+  majBarre();
+  const zone = el('quiz');
+  zone.classList.remove('fadein');
+  void zone.offsetWidth;
+  zone.classList.add('fadein');
+  el('question').textContent = item.q;
+  el('options').innerHTML = item.o
+    .map((o, i) => `<button class="opt" onclick="choisir(${i})">${o[0]}</button>`)
+    .join('');
+}
+
+function choisir(i) {
+  const cle = QUESTIONS[index].o[i][1];
+  scores[cle]++;
+  index++;
+  if (index < QUESTIONS.length) {
+    afficher();
+  } else {
+    calculer();
+  }
+}
+
+function calculer() {
+  profilFinal = Object.keys(scores).reduce((a, b) => (scores[a] >= scores[b] ? a : b));
+  const p = PROFILS[profilFinal];
+  el('nom').textContent = p.nom;
+  el('tagline').textContent = p.tag;
+  el('desc').textContent = p.desc;
+  el('cout').textContent = p.cout;
+  el('aide').textContent = p.aide;
+  el('quiz').classList.add('hidden');
+  const r = el('resultat');
+  r.classList.remove('hidden');
+  r.classList.add('fadein');
+  window.scrollTo(0, 0);
+}
+
+function toast(msg) {
+  const t = el('toast');
+  t.textContent = msg;
+  t.classList.add('on');
+  setTimeout(() => t.classList.remove('on'), 2600);
+}
+
+async function envoyer() {
+  const mail = el('email').value.trim();
+  if (!mail || !mail.includes('@') || !mail.includes('.')) {
+    toast('Vérifie ton adresse email');
+    return;
+  }
+  const btn = document.querySelector('#mailbox .cta');
+  btn.textContent = 'Envoi...';
+  btn.disabled = true;
+
+  try {
+    const r = await fetch(SUPA_URL + '/rest/v1/quiz_leads', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email: mail, profil: profilFinal })
+    });
+    if (!r.ok) throw new Error(await r.text());
+    el('mailbox').innerHTML =
+      '<div class="lbl">C\'est noté</div>' +
+      '<p class="txt">Ton analyse complète arrive bientôt sur ' + mail + '.</p>';
+    toast('Bien reçu');
+  } catch (e) {
+    console.error('SUPABASE:', e);
+    btn.textContent = 'Recevoir mon analyse';
+    btn.disabled = false;
+    toast('Réessaie dans un instant');
+  }
+}
+
+function partager() {
+  const p = PROFILS[profilFinal];
+  const texte = 'Je suis ' + p.nom + '. ' + p.tag + '\nEt toi, quel est ton type de mental ?';
+  if (navigator.share) {
+    navigator.share({ title: 'Quel est ton type de mental ?', text: texte, url: location.href })
+      .catch(() => {});
+  } else {
+    navigator.clipboard.writeText(texte + '\n' + location.href);
+    toast('Copié');
+  }
+}
+
+function recommencer() {
+  index = 0;
+  scores = { rembobineur: 0, meteorologue: 0, procureur: 0, decodeur: 0, sature: 0 };
+  el('resultat').classList.add('hidden');
+  el('intro').classList.remove('hidden');
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
